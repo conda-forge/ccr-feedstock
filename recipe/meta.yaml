@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/ccr/ccr/releases/download/v{{ version | replace(".","_") }}/ccr-{{ version }}.tar.gz
-  sha256: d41b8e7f94cb579ea8c39895d879d15f1535f3fe72c65262ac93389ca2256082
+  sha256: bb892e3319e5d748e29453f801286ec2f82bf4074f2f86de0e9b1ba5f08995c6
 
 build:
   number: 0
