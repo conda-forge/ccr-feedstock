@@ -28,7 +28,9 @@ requirements:
     - hdf5
     - bzip2
     - zstd
-    - lz4-c
+    # No lz4 support yet
+    # https://github.com/ccr/ccr/issues/20
+    # - lz4-c
     # not sure if this exists on conda forge yet
     # - bitgroom
 
@@ -42,7 +44,7 @@ test:
     # - ccr-config --has-bitgroom | grep yes       # [unix]
     - ccr-config --has-bzip2    | grep yes       # [unix]
     # - ccr-config --has-fortran  | grep yes       # [unix]
-    - ccr-config --has-lz4      | grep yes       # [unix]
+    # - ccr-config --has-lz4      | grep yes       # [unix]
     - ccr-config --has-zstd     | grep yes       # [unix]
 
 about:
