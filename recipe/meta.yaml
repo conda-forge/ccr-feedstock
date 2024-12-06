@@ -9,7 +9,7 @@ source:
   sha256: bb892e3319e5d748e29453f801286ec2f82bf4074f2f86de0e9b1ba5f08995c6
 
 build:
-  number: 8
+  number: 9
   # No windows build available
   # https://github.com/ccr/ccr/issues/166
   # https://github.com/ccr/ccr/issues/167
