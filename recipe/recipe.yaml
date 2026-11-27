@@ -1,0 +1,59 @@
+context:
+  version: "2.0.0"
+
+package:
+  name: ccr
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ccr/ccr/archive/refs/tags/v${{ version | replace(".", "_") }}.tar.gz
+  sha256: a9b12720265b5a4d694c3e43de66c3aa3bdafd59106cc0f1b6b82b966687d8e6
+
+build:
+  number: 0
+  # No windows build available
+  # https://github.com/ccr/ccr/issues/166
+  # https://github.com/ccr/ccr/issues/167
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - make
+    - autoconf
+    - automake
+    - libtool
+  host:
+    - libnetcdf
+    - hdf5
+    - lz4-c
+  run_exports:
+    # 2021/12/29 hmaarrfk
+    # No information on https://abi-laboratory.pro/
+    - ${{ pin_subpackage('ccr', upper_bound='x.x') }}
+
+tests:
+  - script:
+      - ccr-config --help
+      - test -f ${PREFIX}/include/ccr.h
+      - test -f ${PREFIX}/lib/libccr${SHLIB_EXT}
+      - test ! -f ${PREFIX}/lib/libccr.a
+      - cat ${PREFIX}/lib/libccr.settings
+      - ccr-config --has-lz4 | grep yes
+      - test -f ${PREFIX}/lib/hdf5/plugin/libh5lz4${SHLIB_EXT}
+
+about:
+  homepage: https://github.com/ccr/ccr
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Community Codec Repository
+  description: |
+    This project supports compression (and other) filters for netCDF/HDF5 files
+    which are not natively supported by the netCDF C library.
+  documentation: https://ccr.github.io/ccr/
+  repository: https://github.com/ccr/ccr
+
+extra:
+  recipe-maintainers:
+    - hmaarrfk
